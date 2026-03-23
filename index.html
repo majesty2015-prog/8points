@@ -821,6 +821,21 @@
       document.getElementById('formContent').style.display = 'none';
       document.getElementById('formSuccess').style.display  = 'block';
     });
+
+    // Отправляем уведомление в Telegram (не ждем результата)
+    const telegramMessage = `📬 Новая заявка на 8POINTS:\n\n👤 Имя: ${name}\n📧 Email: ${email}\n🏢 Компания: ${company || '—'}\n📞 Телефон: ${phone}\n💬 Сообщение: ${message}`;
+    const chatId = '1952905232';
+    const token = '8220068671:AAG3wv_nbQJ0exwzQ4xFbDr-LF3FlwvMZKQ';
+
+    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: telegramMessage,
+        parse_mode: 'HTML'
+      })
+    }).catch(err => console.log('Telegram: не удалось отправить'));
   }
 
   function showError(msg) {
