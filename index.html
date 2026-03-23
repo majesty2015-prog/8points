@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="8 ПОИНТС — экспертная диагностика бизнес-процессов. Определяем, где компания теряет ресурсы, и указываем вектор изменений.">
+  <title>8 ПОИНТС — Диагностика бизнес-процессов на эффективность</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #F7F6F1;
+      --bg-dark:      #08080F;
+      --bg-dark-2:    #0F0F1C;
+      --text:         #0A0A12;
+      --text-muted:   #6B6875;
+      --accent:       #4F46E5;
+      --accent-hover: #4338CA;
+      --accent-light: rgba(79,70,229,0.08);
+      --white:        #FFFFFF;
+      --border:       rgba(10,10,18,0.1);
+      --border-light: rgba(255,255,255,0.08);
+      --font-serif:   'Playfair Display', Georgia, serif;
+      --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --max-w:        1180px;
+      --radius:       16px;
+      --t:            0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 { font-family: var(--font-serif); line-height: 1.12; }
+    h1 { font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 900; }
+    h2 { font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700; }
+    h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 700; }
+    p  { font-size: clamp(0.93rem, 1.4vw, 1.05rem); color: var(--text-muted); }
+    a  { color: inherit; text-decoration: none; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    section     { padding: 96px 24px; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; border-radius: 8px;
+      font-size: 0.93rem; font-weight: 600; letter-spacing: 0.01em;
+      cursor: pointer; transition: var(--t); border: none; font-family: var(--font-sans);
+    }
+    .btn-primary  { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(79,70,229,0.3); }
+    .btn-outline  { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.25); }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.65); }
+    .btn-dark     { background: var(--text); color: #fff; }
+    .btn-dark:hover { background: #1a1a2e; transform: translateY(-1px); }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 22px 24px; transition: var(--t);
+    }
+    .nav.scrolled {
+      background: rgba(8,8,15,0.90);
+      backdrop-filter: blur(20px);
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: var(--font-sans); font-weight: 700;
+      font-size: 1.05rem; letter-spacing: 0.12em; color: #fff;
+    }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.6); font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { padding: 10px 20px; font-size: 0.88rem; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: var(--t); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: var(--bg-dark); z-index: 99;
+      flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: #fff; font-size: 1.4rem; font-weight: 500; }
+    .mobile-close {
+      position: absolute; top: 24px; right: 28px;
+      cursor: pointer; color: rgba(255,255,255,0.4); font-size: 1.4rem; line-height: 1;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--bg-dark);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -30%; right: -8%; width: 70%; height: 130%;
+      background: radial-gradient(ellipse, rgba(79,70,229,0.16) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -20%; left: -8%; width: 50%; height: 80%;
+      background: radial-gradient(ellipse, rgba(99,102,241,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: var(--max-w); margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(79,70,229,0.12); border: 1px solid rgba(79,70,229,0.22);
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 32px;
+    }
+    .hero h1 { color: #fff; max-width: 800px; margin-bottom: 28px; }
+    .hero h1 em { font-style: italic; color: #818CF8; }
+    .hero-sub {
+      font-size: clamp(1rem, 1.7vw, 1.18rem);
+      color: rgba(255,255,255,0.5);
+      max-width: 500px; margin-bottom: 48px; line-height: 1.75;
+      font-family: var(--font-sans);
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+
+    .hero-scroll {
+      position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      color: rgba(255,255,255,0.25); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+      animation: pulseLine 2.2s ease-in-out infinite;
+    }
+    @keyframes pulseLine {
+      0%,100% { opacity: 0.25; transform: scaleY(1); }
+      50%      { opacity: 0.7;  transform: scaleY(0.65); }
+    }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      display: block; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: clamp(0.97rem, 1.5vw, 1.08rem);
+      color: var(--text-muted); max-width: 540px; line-height: 1.75;
+      margin-bottom: 56px;
+    }
+
+    /* ── PROBLEMS ── */
+    .problems-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px; margin-top: 56px;
+    }
+    .problem-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 36px 30px; border: 1px solid var(--border);
+      transition: var(--t);
+    }
+    .problem-card:hover {
+      box-shadow: 0 16px 48px rgba(0,0,0,0.07);
+      transform: translateY(-4px);
+      border-color: rgba(79,70,229,0.18);
+    }
+    .problem-icon {
+      width: 44px; height: 44px;
+      background: var(--accent-light); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; margin-bottom: 18px;
+    }
+    .problem-card h3 { font-size: 1.05rem; margin-bottom: 10px; color: var(--text); }
+    .problem-card p  { font-size: 0.93rem; line-height: 1.65; }
+
+    /* ── SERVICE ── */
+    .service {
+      background: var(--bg-dark); color: #fff;
+      position: relative; overflow: hidden;
+    }
+    .service::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 75% 50%, rgba(79,70,229,0.13), transparent 58%);
+      pointer-events: none;
+    }
+    .service .section-label { color: #818CF8; }
+    .service-features {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px; background: rgba(255,255,255,0.05);
+      border-radius: var(--radius); overflow: hidden; margin-top: 56px;
+    }
+    .feature-item {
+      padding: 48px 38px; background: var(--bg-dark); transition: var(--t);
+    }
+    .feature-item:hover { background: var(--bg-dark-2); }
+    .feature-num { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: #818CF8; margin-bottom: 22px; }
+    .feature-item h3 { font-size: 1.25rem; color: #fff; margin-bottom: 12px; }
+    .feature-item p  { color: rgba(255,255,255,0.42); font-size: 0.93rem; line-height: 1.75; }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; margin-top: 56px;
+    }
+    .step {
+      padding: 44px 32px; border-right: 1px solid var(--border);
+      background: var(--white); transition: background 0.2s;
+    }
+    .step:last-child { border-right: none; }
+    .step:hover { background: #FAFAF7; }
+    .step-num {
+      font-size: 2.8rem; font-weight: 900; font-family: var(--font-serif);
+      color: rgba(79,70,229,0.13); line-height: 1; margin-bottom: 18px;
+    }
+    .step h3 { font-size: 1.05rem; margin-bottom: 10px; color: var(--text); }
+    .step p  { font-size: 0.91rem; line-height: 1.65; }
+
+    /* ── DIFFERENTIATION ── */
+    .diff { padding-top: 0; }
+    .diff-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; margin-top: 56px;
+    }
+    .diff-col { border-radius: var(--radius); padding: 40px 36px; }
+    .diff-col-other { background: var(--white); border: 1px solid var(--border); }
+    .diff-col-us    { background: var(--bg-dark); }
+    .diff-col h3 {
+      font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 28px;
+      padding-bottom: 20px;
+    }
+    .diff-col-other h3 { color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    .diff-col-us    h3 { color: rgba(255,255,255,0.3); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .diff-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; font-size: 0.93rem; }
+    .diff-col-other .diff-item { color: var(--text-muted); }
+    .diff-col-us    .diff-item { color: rgba(255,255,255,0.7); }
+    .diff-icon { flex-shrink: 0; margin-top: 2px; font-style: normal; }
+
+    /* ── PRICING ── */
+    .pricing-card {
+      max-width: 660px; margin: 56px auto 0;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 24px; padding: 56px 52px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), #818CF8);
+    }
+    .pricing-name {
+      font-family: var(--font-sans); font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 16px;
+    }
+    .pricing-price {
+      font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 900;
+      font-family: var(--font-serif); color: var(--text); margin-bottom: 8px;
+    }
+    .pricing-note { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 40px; }
+    .pricing-list { list-style: none; text-align: left; margin: 0 0 40px; display: grid; gap: 13px; }
+    .pricing-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.93rem; color: var(--text-muted); }
+    .pricing-list li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--bg-dark); color: #fff;
+      position: relative; overflow: hidden;
+    }
+    .about::after {
+      content: '';
+      position: absolute; bottom: -25%; right: -5%; width: 45%; height: 80%;
+      background: radial-gradient(ellipse, rgba(79,70,229,0.1), transparent 60%);
+      pointer-events: none;
+    }
+    .about-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .about .section-label { color: #818CF8; }
+    .about h2 { color: #fff; margin-bottom: 24px; }
+    .about-text p { color: rgba(255,255,255,0.5); font-size: 0.97rem; line-height: 1.8; margin-bottom: 18px; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .stat-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px; padding: 28px 24px;
+    }
+    .stat-num  { display: block; font-size: 2.2rem; font-weight: 900; font-family: var(--font-serif); color: #fff; }
+    .stat-lbl  { font-size: 0.82rem; color: rgba(255,255,255,0.35); margin-top: 6px; line-height: 1.4; display: block; }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.6fr; gap: 72px; align-items: start;
+    }
+    .contact-info h2 { margin-bottom: 18px; }
+    .contact-info p  { font-size: 0.97rem; line-height: 1.8; margin-bottom: 44px; }
+    .contact-details { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .contact-details li { display: flex; align-items: center; gap: 14px; font-size: 0.93rem; color: var(--text-muted); }
+    .c-icon {
+      width: 40px; height: 40px; background: var(--accent-light);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 1rem; flex-shrink: 0;
+    }
+
+    .contact-form {
+      background: var(--white); border-radius: 24px;
+      padding: 48px 44px; border: 1px solid var(--border);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    label {
+      display: block; font-size: 0.82rem; font-weight: 500;
+      color: var(--text); margin-bottom: 7px;
+    }
+    input, textarea {
+      width: 100%; padding: 12px 15px; border: 1.5px solid var(--border);
+      border-radius: 9px; font-size: 0.93rem; font-family: var(--font-sans);
+      color: var(--text); background: var(--bg); transition: border-color 0.2s; outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--accent); background: var(--white); }
+    input::placeholder, textarea::placeholder { color: #B0ACBA; }
+    textarea { resize: vertical; min-height: 118px; }
+
+    .consent-row {
+      display: flex; align-items: flex-start; gap: 11px; margin: 22px 0;
+    }
+    .consent-row input[type="checkbox"] {
+      width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px;
+      accent-color: var(--accent); background: transparent;
+      border: 1.5px solid var(--border); border-radius: 4px;
+    }
+    .consent-row label {
+      font-size: 0.82rem; color: var(--text-muted); line-height: 1.55;
+      margin-bottom: 0; font-weight: 400; cursor: pointer;
+    }
+    .consent-row label a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    .btn-submit { width: 100%; justify-content: center; padding: 15px; font-size: 0.97rem; }
+
+    .form-success {
+      display: none; text-align: center; padding: 48px 20px;
+    }
+    .form-success .success-icon { font-size: 2.8rem; margin-bottom: 16px; }
+    .form-success h3 { font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 10px; color: var(--text); }
+    .form-success p   { font-size: 0.95rem; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--bg-dark); color: rgba(255,255,255,0.35); padding: 44px 24px; }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo { font-weight: 700; letter-spacing: 0.12em; color: rgba(255,255,255,0.65); font-size: 0.95rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 20px; list-style: none; }
+    .footer-links a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.35);
+      text-decoration: underline; text-underline-offset: 3px;
+      text-decoration-color: rgba(255,255,255,0.12); transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.65); }
+    .footer-copy { font-size: 0.82rem; }
+
+    /* ── ANIMATIONS ── */
+    .fade-up { opacity: 0; transform: translateY(22px); }
+    .fade-up.visible {
+      opacity: 1; transform: none;
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .step:nth-child(2) { border-right: none; }
+      .step:nth-child(1), .step:nth-child(2) { border-bottom: 1px solid var(--border); }
+      .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .diff-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 72px 20px; }
+      .nav-links, .nav-cta-wrap { display: none; }
+      .hamburger { display: flex; }
+      .hero { padding: 100px 20px 72px; }
+      .pricing-card { padding: 40px 28px; }
+      .contact-form { padding: 36px 26px; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .steps { grid-template-columns: 1fr; }
+      .step { border-right: none !important; border-bottom: 1px solid var(--border); }
+      .step:last-child { border-bottom: none; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">8 <span>ПОИНТС</span></a>
+    <ul class="nav-links">
+      <li><a href="#service">Услуга</a></li>
+      <li><a href="#how">Как работает</a></li>
+      <li><a href="#pricing">Стоимость</a></li>
+      <li><a href="#about">О компании</a></li>
+    </ul>
+    <div class="nav-cta-wrap">
+      <a href="#contact" class="btn btn-primary nav-cta">Связаться</a>
+    </div>
+    <div class="hamburger" id="hamburger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ MOBILE MENU ═══ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+  <span class="mobile-close" id="mobileClose" aria-label="Закрыть">✕</span>
+  <a href="#service"  class="mob-link">Услуга</a>
+  <a href="#how"      class="mob-link">Как работает</a>
+  <a href="#pricing"  class="mob-link">Стоимость</a>
+  <a href="#about"    class="mob-link">О компании</a>
+  <a href="#contact"  class="btn btn-primary">Связаться</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-label">Бизнес-диагностика</div>
+    <h1>Плато прибыли — это <em>симптом.</em><br>Найдём причину</h1>
+    <p class="hero-sub">
+      Покажем, где ваш бизнес теряет деньги, ресурсы и рост —
+даже если внешне всё работает. Без сложных отчётов и абстрактных рекомендаций, а с конкретным планом изменений.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Получить анализ бизнеса</a>
+      <a href="#service"  class="btn btn-outline">Узнать подробнее</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROBLEMS ═══ -->
+<section id="problems">
+  <div class="container">
+    <span class="section-label">Кому это нужно</span>
+    <h2 style="margin-bottom:16px">Когда мы<br>полезны</h2>
+    <p class="section-sub">
+      Вы делаете много, но результат не соответствует усилиям? Мы разбираем бизнес изнутри и снаружи
+и находим слепые зоны, утечки и точки роста, которые не видно в операционке.
+    </p>
+    <div class="problems-grid">
+      <div class="problem-card fade-up">
+        <div class="problem-icon">📉</div>
+        <h3>Прибыль застыла</h3>
+        <p>Вы вкладываете деньги, усилия — но рост не соответствует вложениям. Бизнес стоит на месте без видимых причин.</p>
+      </div>
+      <div class="problem-card fade-up">
+        <div class="problem-icon">💸</div>
+        <h3>Ресурсы уходят «в никуда»</h3>
+        <p>Реклама работает, но не даёт нужного результата. Сотрудники заняты, но нет эффективности.</p>
+      </div>
+      <div class="problem-card fade-up">
+        <div class="problem-icon">🔍</div>
+        <h3>Непонятно, где буксует</h3>
+        <p>Всё работает, но отдачи нет. Сложно поставить диагноз, являясь частью системы.</p>
+      </div>
+      <div class="problem-card fade-up">
+        <div class="problem-icon">🏢</div>
+        <h3>Не хочется переплачивать</h3>
+        <p>Консалтинговые компании стоят дорого и дают объёмные отчёты. А нужен конкретный ответ без лишнего.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICE ═══ -->
+<section class="service" id="service">
+  <div class="container" style="position:relative;z-index:1">
+    <span class="section-label">Что мы даём</span>
+    <h2 style="color:#fff;max-width:600px;margin-bottom:16px">Не отчёт.<br>Не цифры. А вектор роста!</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.42)">
+      Это не аудит и не классический консалтинг. Мы смотрим на бизнес сразу с трех позиций - как клиент, сотрудник и собственник. И находим, где процессы не работают, где теряются деньги и где команда "делает, но не туда".
+    </p>
+    <div class="service-features">
+      <div class="feature-item fade-up">
+        <div class="feature-num">01</div>
+        <h3>Взгляд снаружи и изнутри</h3>
+        <p>Мы заходим в бизнес как внешний наблюдатель и разбираем, что происходит на самом деле.</p>
+      </div>
+      <div class="feature-item fade-up">
+        <div class="feature-num">02</div>
+        <h3>Причинно-следственный анализ</h3>
+        <p>Находим корневые причины, в хаотичных и непрозрачных ситуациях докапываемся до сути малой эффективности.</p>
+      </div>
+      <div class="feature-item fade-up">
+        <div class="feature-num">03</div>
+        <h3>Конкретный вектор изменений</h3>
+        <p>Даём понятный план действий - что убрать отсюда, что направить туда, что поменять в первую очередь. По сути, только факты и приоритеты.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section id="how">
+  <div class="container">
+    <span class="section-label">Процесс к результату</span>
+    <h2 style="margin-bottom:16px">Как проходит<br>работа</h2>
+    <p class="section-sub">Быстро и без бюрократии. От первого контакта до конкретного результата 1 неделя - месяц.</p>
+    <div class="steps">
+      <div class="step fade-up">
+        <div class="step-num">01</div>
+        <h3>Знакомство</h3>
+        <p>30-минутный созвон. Слушаем ситуацию, задаем вопросы, понимаем контекст и определяем точку входа.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">02</div>
+        <h3>Погружение</h3>
+        <p>Изучаем процессы и команду. Смотрим на бизнес как объективный наблюдатель — снаружи и изнутри.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">03</div>
+        <h3>Диагностика</h3>
+        <p>Находим где именно теряются деньги, какие процессы не работают, где команда тратит ресурсы впустую, что тормозит рост.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">04</div>
+        <h3>Результат</h3>
+        <p>Даём конкретное направление: что убрать, что усилить, куда перенаправить ресурсы и усилия команды, чтобы начать повышать прибыль.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIFFERENTIATION ═══ -->
+<section class="diff" id="diff">
+  <div class="container">
+    <span class="section-label">В чём отличие</span>
+    <h2 style="margin-bottom:16px">Почему не<br>классический консалтинг</h2>
+    <p class="section-sub">Экспертная диагностика без типичных издержек крупных компаний доступнее стандартного консалтинга в 5–10 раз.</p>
+    <div class="diff-grid">
+      <div class="diff-col diff-col-other fade-up">
+        <h3>Консалтинговые компании</h3>
+        <div class="diff-item"><em class="diff-icon">✗</em><span>Месяцы работы и длинные контракты</span></div>
+        <div class="diff-item"><em class="diff-icon">✗</em><span>Высокая стоимость — от 300 тыс. ₽ и выше</span></div>
+        <div class="diff-item"><em class="diff-icon">✗</em><span>Объёмные отчёты без чёткого фокуса</span></div>
+        <div class="diff-item"><em class="diff-icon">✗</em><span>Шаблонные рекомендации под любой бизнес</span></div>
+        <div class="diff-item"><em class="diff-icon">✗</em><span>Команда аналитиков без многогранного погружения</span></div>
+      </div>
+      <div class="diff-col diff-col-us fade-up">
+        <h3>8 ПОИНТС</h3>
+        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Быстро — от первого созвона до вектора</span></div>
+        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Доступная стоимость без раздутого бюджета</span></div>
+        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Конкретный вектор изменений, чтобы начать расти</span></div>
+        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Индивидуальная диагностика под вашу ситуацию</span></div>
+        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Один эксперт — полная ответственность и погружение</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing">
+  <div class="container">
+    <span class="section-label" style="text-align:center;display:block">Стоимость</span>
+    <h2 style="text-align:center;margin-bottom:0">Прозрачная цена</h2>
+    <div class="pricing-card fade-up">
+      <div class="pricing-name">Диагностика бизнес-процессов</div>
+      <!-- TODO: замените стоимость на актуальную -->
+      <div class="pricing-price">от 30 000 ₽</div>
+      <p class="pricing-note">Итоговая стоимость зависит от масштаба бизнеса</p>
+      <ul class="pricing-list">
+        <li>Предварительный 30-минутный созвон</li>
+        <li>Анализ распределения ресурсов снаружи и изнутри</li>
+        <li>Выявление точек потерь — где уходят деньги и усилия</li>
+        <li>Определение точек недовложения и роста</li>
+        <li>Итоговый разбор с конкретным планом изменений</li>
+        <li>Ответы на вопросы</li>
+      </ul>
+      <a href="#contact" class="btn btn-dark btn-submit">Проанализировать мой бизнес</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-text fade-up">
+      <span class="section-label">О компании</span>
+      <h2>Аналитика —<br>это склад ума,<br><em>не профессия.</em></h2>
+      <p>
+        8 ПОИНТС — это не агентство с десятками сотрудников и типовыми методологиями.
+        Это один эксперт с глубокой аналитической структурой мышления и многопрофильным 16-летним опытом, в том числе в маркетинге и международной компании с известной историей.
+      </p>
+      <p>
+        <i>«В хаотичных и непрозрачных ситуациях я нахожу суть. Вижу причинно-следственные связи
+        там, где другие их не видят. Именно это позволяет мне точно определить, где бизнес
+        теряет и где недополучает», </i>- Наталия Акинина, эксперт по анализу бизнеса.
+      </p>
+      <p>
+        Мы работаем с компаниями, которые застряли на плато или медленно теряют прибыль —
+        и хотят понять почему, не вкладывая в это ощутимый бюджет на консалтинг.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-item fade-up">
+        <span class="stat-num">8</span>
+        <span class="stat-lbl">ключевых векторов анализа в каждой диагностике</span>
+      </div>
+      <div class="stat-item fade-up">
+        <span class="stat-num">1</span>
+        <span class="stat-lbl">эксперт без посредников — полная ответственность</span>
+      </div>
+      <div class="stat-item fade-up">
+        <span class="stat-num">≠</span>
+        <span class="stat-lbl">не проверка отчетов и финансов, а сбор фокуса развития</span>
+      </div>
+      <div class="stat-item fade-up">
+        <span class="stat-num">= 0</span>
+        <span class="stat-lbl">шаблонных решений — каждый кейс уникален</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-info fade-up">
+      <span class="section-label">Связаться</span>
+      <h2>Обсудим<br>вашу ситуацию</h2>
+      <p>
+        Оставьте заявку или позвоните. Расскажите о ситуации в вашем бизнесе, и мы ответим, как сможем помочь.
+      </p>
+      <ul class="contact-details">
+        <li>
+          <div class="c-icon">✉</div>
+          <!-- TODO: укажите ваш email -->
+          <span>info@8points.ru</span>
+        </li>
+        <li>
+          <div class="c-icon">✆</div>
+          <!-- TODO: укажите ваш телефон -->
+          <span>+7 (952) 812-19-77</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="contact-form fade-up">
+      <div id="formContent">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-name">Ваше имя *</label>
+            <input type="text" id="f-name" placeholder="Иван Петров" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="f-company">Компания</label>
+            <input type="text" id="f-company" placeholder="ООО Стимул" autocomplete="organization">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-email">Email *</label>
+            <input type="email" id="f-email" placeholder="ivan@company.ru" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="f-phone">Телефон</label>
+            <input type="tel" id="f-phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="f-message">Кратко опишите ситуацию</label>
+          <textarea id="f-message" placeholder="Что происходит в вашем бизнесе? Что вас беспокоит?"></textarea>
+        </div>
+        <div class="consent-row">
+          <input type="checkbox" id="f-consent">
+          <label for="f-consent">
+            Я даю <a href="agreement.html" target="_blank" rel="noopener">согласие на обработку персональных данных</a> в соответствии с
+            <a href="privacy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a>
+            и
+            <a href="personal-data.html" target="_blank" rel="noopener">Политикой обработки персональных данных</a>
+          </label>
+        </div>
+        <button class="btn btn-primary btn-submit" onclick="submitForm()">
+          Отправить заявку
+        </button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">✓</div>
+        <h3>Заявка отправлена</h3>
+        <p>Свяжусь с вами в течение 24 часов для согласования удобного времени созвона.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">8 ПОИНТС</span>
+    <ul class="footer-links">
+      <li><a href="privacy.html"       target="_blank" rel="noopener">Политика конфиденциальности</a></li>
+      <li><a href="personal-data.html" target="_blank" rel="noopener">Обработка персональных данных</a></li>
+      <li><a href="agreement.html"     target="_blank" rel="noopener">Пользовательское соглашение</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 8 ПОИНТС. Все права защищены.</span>
+  </div>
+</footer>
+
+<script>
+  // ── Nav scroll ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // ── Mobile menu ──
+  const hamburger    = document.getElementById('hamburger');
+  const mobileMenu   = document.getElementById('mobileMenu');
+  const mobileClose  = document.getElementById('mobileClose');
+  hamburger.addEventListener('click',   () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  document.querySelectorAll('.mob-link, .mobile-menu .btn').forEach(el =>
+    el.addEventListener('click', () => mobileMenu.classList.remove('open'))
+  );
+
+  // ── Scroll animations ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const siblings = Array.from(entry.target.parentNode.children);
+      const idx = siblings.indexOf(entry.target);
+      setTimeout(() => entry.target.classList.add('visible'), Math.min(idx * 90, 270));
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── Smooth anchor scroll (offset for fixed nav) ──
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' });
+    });
+  });
+
+  // ── Form submit ──
+  // TODO: подключите реальную отправку — FormSubmit, Formspree, или свой бэкенд
+  function submitForm() {
+    const name    = document.getElementById('f-name').value.trim();
+    const email   = document.getElementById('f-email').value.trim();
+    const consent = document.getElementById('f-consent').checked;
+
+    if (!name)                       { showError('Пожалуйста, введите ваше имя');                          return; }
+    if (!email || !email.includes('@')) { showError('Пожалуйста, введите корректный email');              return; }
+    if (!consent)                    { showError('Необходимо согласие на обработку персональных данных'); return; }
+
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('formSuccess').style.display  = 'block';
+  }
+
+  function showError(msg) {
+    const existing = document.querySelector('.form-error');
+    if (existing) existing.remove();
+    const el = document.createElement('p');
+    el.className = 'form-error';
+    el.style.cssText = 'color:#E53E3E;font-size:.85rem;margin-bottom:12px;';
+    el.textContent = msg;
+    document.querySelector('#formContent .consent-row').before(el);
+    setTimeout(() => el.remove(), 4000);
+  }
+</script>
+</body>
+</html>
