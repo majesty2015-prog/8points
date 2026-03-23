@@ -796,33 +796,31 @@
     btn.disabled = true;
     btn.textContent = 'Отправляю...';
 
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('company', company);
-    formData.append('phone', phone);
-    formData.append('message', message);
+    // Отправляем как обычную форму, а не AJAX
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://formsubmit.co/akinina.n@inbox.ru';
 
-    fetch('https://formspree.io/f/xgvqyozq', {
-      method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(response => {
-      if (response.ok) {
-        document.getElementById('formContent').style.display = 'none';
-        document.getElementById('formSuccess').style.display  = 'block';
-      } else {
-        showError('Ошибка при отправке. Попробуйте ещё раз');
-        btn.disabled = false;
-        btn.textContent = 'Отправить заявку';
-      }
-    })
-    .catch(error => {
-      showError('Не удалось отправить форму. Проверьте интернет');
-      btn.disabled = false;
-      btn.textContent = 'Отправить заявку';
-    });
+    const fields = {
+      name: name,
+      email: email,
+      company: company,
+      phone: phone,
+      message: message,
+      _subject: `Новая заявка от ${name}`,
+      _captcha: 'false'
+    };
+
+    for (let key in fields) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = fields[key];
+      form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
   }
 
   function showError(msg) {
