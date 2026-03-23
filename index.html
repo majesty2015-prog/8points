@@ -802,12 +802,11 @@
     formData.append('company', company);
     formData.append('phone', phone);
     formData.append('message', message);
-    formData.append('_subject', `Новая заявка от ${name}`);
-    formData.append('_captcha', 'false');
 
-    fetch('https://formsubmit.co/ajax/akinina.n@inbox.ru', {
+    fetch('https://formspree.io/f/xgvqyozq', {
       method: 'POST',
-      body: formData
+      body: formData,
+      headers: { 'Accept': 'application/json' }
     })
     .then(response => {
       if (response.ok) {
