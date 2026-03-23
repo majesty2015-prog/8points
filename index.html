@@ -781,18 +781,50 @@
   });
 
   // ── Form submit ──
-  // TODO: подключите реальную отправку — FormSubmit, Formspree, или свой бэкенд
   function submitForm() {
     const name    = document.getElementById('f-name').value.trim();
     const email   = document.getElementById('f-email').value.trim();
+    const company = document.getElementById('f-company').value.trim();
+    const phone   = document.getElementById('f-phone').value.trim();
+    const message = document.getElementById('f-message').value.trim();
     const consent = document.getElementById('f-consent').checked;
 
     if (!name)                       { showError('Пожалуйста, введите ваше имя');                          return; }
     if (!email || !email.includes('@')) { showError('Пожалуйста, введите корректный email');              return; }
     if (!consent)                    { showError('Необходимо согласие на обработку персональных данных'); return; }
 
-    document.getElementById('formContent').style.display = 'none';
-    document.getElementById('formSuccess').style.display  = 'block';
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = 'Отправляю...';
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('company', company);
+    formData.append('phone', phone);
+    formData.append('message', message);
+    formData.append('_subject', `Новая заявка от ${name}`);
+    formData.append('_captcha', 'false');
+
+    fetch('https://formsubmit.co/ajax/akinina.n@inbox.ru', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        document.getElementById('formContent').style.display = 'none';
+        document.getElementById('formSuccess').style.display  = 'block';
+      } else {
+        showError('Ошибка при отправке. Попробуйте ещё раз');
+        btn.disabled = false;
+        btn.textContent = 'Отправить заявку';
+      }
+    })
+    .catch(error => {
+      showError('Не удалось отправить форму. Проверьте интернет');
+      btn.disabled = false;
+      btn.textContent = 'Отправить заявку';
+    });
   }
 
   function showError(msg) {
