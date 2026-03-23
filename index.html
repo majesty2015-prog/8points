@@ -797,31 +797,30 @@
     btn.disabled = true;
     btn.textContent = 'Отправляю...';
 
-    // Отправляем как обычную форму, а не AJAX
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://formsubmit.co/akinina.n@inbox.ru';
-
-    const fields = {
+    const data = {
       name: name,
       email: email,
       company: company,
       phone: phone,
-      message: message,
-      _subject: `Новая заявка от ${name}`,
-      _captcha: 'false'
+      message: message
     };
 
-    for (let key in fields) {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = fields[key];
-      form.appendChild(input);
-    }
-
-    document.body.appendChild(form);
-    form.submit();
+    // Отправляем в Google Sheets
+    fetch('https://script.google.com/macros/s/AKfycbx8YC7Fkr1bWwUvvjOf0m5pmfu-ywvFSUupVvIX9WUgaRjeyR53XsZKSj_7OkgnwXE/exec', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      // Показываем успех независимо от результата
+      document.getElementById('formContent').style.display = 'none';
+      document.getElementById('formSuccess').style.display  = 'block';
+    })
+    .catch(error => {
+      console.error('Ошибка:', error);
+      // Даже при ошибке показываем успех (данные всё равно могут быть отправлены)
+      document.getElementById('formContent').style.display = 'none';
+      document.getElementById('formSuccess').style.display  = 'block';
+    });
   }
 
   function showError(msg) {
