@@ -85,6 +85,14 @@
       font-size: 1.05rem; letter-spacing: 0.12em; color: #fff;
     }
     .logo span { color: var(--accent); }
+    .logo-8 { display: inline-block; color: inherit; animation: spin8 12s ease-in-out infinite; }
+    @keyframes spin8 {
+      0%                          { transform: rotate(0deg); }
+      58.33%                      { transform: rotate(0deg); }   /* 7s вертикально */
+      62.5%                       { transform: rotate(90deg); }  /* 0.5s поворот */
+      95.83%                      { transform: rotate(90deg); }  /* 4s горизонтально */
+      100%                        { transform: rotate(0deg); }   /* 0.5s возврат */
+    }
     .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
     .nav-links a {
       color: rgba(255,255,255,0.6); font-size: 0.88rem;
@@ -436,7 +444,7 @@
 <!-- ═══ NAV ═══ -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#" class="logo">8 <span>ПОИНТС</span></a>
+    <a href="#" class="logo"><span class="logo-8">8</span> <span>ПОИНТС</span></a>
     <ul class="nav-links">
       <li><a href="#service">Услуга</a></li>
       <li><a href="#how">Как работает</a></li>
