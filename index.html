@@ -258,7 +258,7 @@
     /* ── DIFFERENTIATION ── */
     .diff { padding-top: 0; }
     .diff-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
       gap: 20px; margin-top: 56px;
     }
     .diff-col { border-radius: var(--radius); padding: 40px 36px; }
@@ -437,6 +437,7 @@
       .about-inner { grid-template-columns: 1fr; gap: 48px; }
       .contact-inner { grid-template-columns: 1fr; gap: 48px; }
       .diff-grid { grid-template-columns: 1fr; }
+      .diff-col-freelance { order: 3; }
     }
     @media (max-width: 768px) {
       section { padding: 72px 20px; }
@@ -608,9 +609,25 @@
 <section class="diff" id="diff">
   <div class="container">
     <span class="section-label">В чём отличие</span>
-    <h2 style="margin-bottom:16px">Почему не<br>классический консалтинг</h2>
-    <p class="section-sub">Экспертная диагностика без типичных издержек крупных компаний доступнее стандартного консалтинга в 5–10 раз.</p>
+    <h2 style="margin-bottom:16px">Где находится<br>8 ПОИНТС на рынке</h2>
+    <p class="section-sub">Не дешёвая консультация и не дорогой консалтинг — экспертная диагностика с реальным погружением по доступной цене.</p>
     <div class="diff-grid">
+      <div class="diff-col diff-col-other diff-col-freelance fade-up">
+        <h3>Фрилансеры</h3>
+        <div class="diff-item"><em class="diff-icon">✗</em><span>Общие советы без глубокого анализа</span></div>
+        <div class="diff-item"><em class="diff-icon">✗</em><span>Разовые консультации, а не системная диагностика</span></div>
+        <div class="diff-item"><em class="diff-icon">✗</em><span>Узкая специализация — маркетолог, финансист, HR по отдельности</span></div>
+        <div class="diff-item"><em class="diff-icon">✗</em><span>Нет ответственности за результат</span></div>
+        <div class="diff-item"><em class="diff-icon">✗</em><span>Смотрят на бизнес с одной точки зрения</span></div>
+      </div>
+      <div class="diff-col diff-col-us fade-up">
+        <h3>8 ПОИНТС</h3>
+        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Системный анализ, а не консультация — конкретный вектор действий</span></div>
+        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Взгляд сразу с трёх позиций: клиент, сотрудник, собственник</span></div>
+        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Один эксперт — полное погружение и ответственность</span></div>
+        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Быстро и доступно — от 30 тыс. ₽</span></div>
+        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Индивидуальная диагностика под вашу ситуацию</span></div>
+      </div>
       <div class="diff-col diff-col-other fade-up">
         <h3>Консалтинговые компании</h3>
         <div class="diff-item"><em class="diff-icon">✗</em><span>Месяцы работы и длинные контракты</span></div>
@@ -618,14 +635,6 @@
         <div class="diff-item"><em class="diff-icon">✗</em><span>Объёмные отчёты без чёткого фокуса</span></div>
         <div class="diff-item"><em class="diff-icon">✗</em><span>Шаблонные рекомендации под любой бизнес</span></div>
         <div class="diff-item"><em class="diff-icon">✗</em><span>Команда аналитиков без многогранного погружения</span></div>
-      </div>
-      <div class="diff-col diff-col-us fade-up">
-        <h3>8 ПОИНТС</h3>
-        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Быстро — от первого созвона до вектора</span></div>
-        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Доступная стоимость без раздутого бюджета</span></div>
-        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Конкретный вектор изменений, чтобы начать расти</span></div>
-        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Индивидуальная диагностика под вашу ситуацию</span></div>
-        <div class="diff-item" style="color:rgba(255,255,255,0.72)"><em class="diff-icon" style="color:#818CF8">✓</em><span>Один эксперт — полная ответственность и погружение</span></div>
       </div>
     </div>
   </div>
