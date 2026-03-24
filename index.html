@@ -402,6 +402,22 @@
     }
     .footer-links a:hover { color: rgba(255,255,255,0.65); }
     .footer-copy { font-size: 0.82rem; }
+    .footer-requisites { font-size: 0.78rem; color: rgba(255,255,255,0.25); width: 100%; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 16px; margin-top: 4px; }
+
+    /* ── COOKIE BANNER ── */
+    #cookieBanner {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+      background: #13131f; border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 16px 24px; display: flex; align-items: center; justify-content: center;
+      gap: 20px; flex-wrap: wrap; font-size: 0.83rem; color: rgba(255,255,255,0.6);
+    }
+    #cookieBanner a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    #cookieAccept {
+      background: var(--accent); color: #fff; border: none; border-radius: 8px;
+      padding: 8px 22px; font-size: 0.83rem; font-weight: 600; cursor: pointer;
+      white-space: nowrap; transition: opacity 0.2s;
+    }
+    #cookieAccept:hover { opacity: 0.85; }
 
     /* ── ANIMATIONS ── */
     .fade-up { opacity: 0; transform: translateY(22px); }
@@ -756,8 +772,15 @@
       <li><a href="agreement.html"     target="_blank" rel="noopener">Пользовательское соглашение</a></li>
     </ul>
     <span class="footer-copy">© 2026 8 ПОИНТС. Все права защищены.</span>
+    <p class="footer-requisites">ИП Акинина Наталия Александровна &nbsp;·&nbsp; ОГРНИП 326237500106440 &nbsp;·&nbsp; ИНН 312823927007</p>
   </div>
 </footer>
+
+<!-- ═══ COOKIE BANNER ═══ -->
+<div id="cookieBanner">
+  <span>Мы используем файлы cookie для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с нашей <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</span>
+  <button id="cookieAccept">Принять</button>
+</div>
 
 <script>
   // ── Nav scroll ──
@@ -846,6 +869,16 @@
     document.getElementById('formContent').style.display = 'none';
     document.getElementById('formSuccess').style.display  = 'block';
   }
+
+  // ── Cookie banner ──
+  (function() {
+    const banner = document.getElementById('cookieBanner');
+    if (localStorage.getItem('cookieAccepted')) { banner.style.display = 'none'; return; }
+    document.getElementById('cookieAccept').addEventListener('click', function() {
+      localStorage.setItem('cookieAccepted', '1');
+      banner.style.display = 'none';
+    });
+  })();
 
   function showError(msg) {
     const existing = document.querySelector('.form-error');
