@@ -402,7 +402,9 @@
     }
     .footer-links a:hover { color: rgba(255,255,255,0.65); }
     .footer-copy { font-size: 0.82rem; }
-    .footer-requisites { font-size: 0.78rem; color: rgba(255,255,255,0.25); width: 100%; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 16px; margin-top: 4px; }
+    .footer-right { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+    .footer-top-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-requisites { font-size: 0.78rem; color: rgba(255,255,255,0.25); border-top: 1px solid rgba(255,255,255,0.07); padding-top: 16px; }
 
     /* ── COOKIE BANNER ── */
     #cookieBanner {
@@ -766,13 +768,17 @@
 <footer>
   <div class="footer-inner">
     <span class="footer-logo"><span class="footer-8">8</span> <span class="footer-pts">ПОИНТС</span></span>
-    <ul class="footer-links">
-      <li><a href="privacy.html"       target="_blank" rel="noopener">Политика конфиденциальности</a></li>
-      <li><a href="personal-data.html" target="_blank" rel="noopener">Обработка персональных данных</a></li>
-      <li><a href="agreement.html"     target="_blank" rel="noopener">Пользовательское соглашение</a></li>
-    </ul>
-    <span class="footer-copy">© 2026 8 ПОИНТС. Все права защищены.</span>
-    <p class="footer-requisites">ИП Акинина Наталия Александровна &nbsp;·&nbsp; ОГРНИП 326237500106440 &nbsp;·&nbsp; ИНН 312823927007</p>
+    <div class="footer-right">
+      <div class="footer-top-row">
+        <ul class="footer-links">
+          <li><a href="privacy.html"       target="_blank" rel="noopener">Политика конфиденциальности</a></li>
+          <li><a href="personal-data.html" target="_blank" rel="noopener">Обработка персональных данных</a></li>
+          <li><a href="agreement.html"     target="_blank" rel="noopener">Пользовательское соглашение</a></li>
+        </ul>
+        <span class="footer-copy">© 2026 8 ПОИНТС. Все права защищены.</span>
+      </div>
+      <p class="footer-requisites">ИП Акинина Наталия Александровна &nbsp;·&nbsp; ОГРНИП 326237500106440 &nbsp;·&nbsp; ИНН 312823927007</p>
+    </div>
   </div>
 </footer>
 
