@@ -781,7 +781,7 @@
   });
 
   // ── Form submit ──
-  function submitForm() {
+  async function submitForm() {
     const name    = document.getElementById('f-name').value.trim();
     const email   = document.getElementById('f-email').value.trim();
     const company = document.getElementById('f-company').value.trim();
@@ -789,54 +789,34 @@
     const message = document.getElementById('f-message').value.trim();
     const consent = document.getElementById('f-consent').checked;
 
-    if (!name)                       { showError('Пожалуйста, введите ваше имя');                          return; }
-    if (!email || !email.includes('@')) { showError('Пожалуйста, введите корректный email');              return; }
-    if (!phone)                      { showError('Пожалуйста, введите ваш телефон');                      return; }
-    if (!consent)                    { showError('Необходимо согласие на обработку персональных данных'); return; }
+    if (!name)                         { showError('Пожалуйста, введите ваше имя');                          return; }
+    if (!email || !email.includes('@')) { showError('Пожалуйста, введите корректный email');                 return; }
+    if (!phone)                        { showError('Пожалуйста, введите ваш телефон');                       return; }
+    if (!consent)                      { showError('Необходимо согласие на обработку персональных данных'); return; }
 
-    // Отправляем в FormSubmit
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://formsubmit.co/akinina.n@inbox.ru';
+    const btn = document.querySelector('.btn-submit');
+    btn.disabled = true;
+    btn.textContent = 'Отправляем...';
 
-    const fields = {
-      name: name,
-      email: email,
-      company: company || 'не указана',
-      phone: phone,
-      message: message,
-      _subject: `Новая заявка от ${name} на 8points.site`,
-      _captcha: 'false'
-    };
+    // 1. Google Sheets
+    fetch('https://script.google.com/macros/s/AKfycbx8YC7Fkr1bWwUvvjOf0m5pmfu-ywvFSUupVvIX9WUgaRjeyR53XsZKSj_7OkgnwXE/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, company: company || '—', phone, message })
+    }).catch(() => {});
 
-    for (let key in fields) {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = fields[key];
-      form.appendChild(input);
-    }
-
-    document.body.appendChild(form);
-
-    // Показываем успес сразу (форма переведет на success page)
-    document.getElementById('formContent').style.display = 'none';
-    document.getElementById('formSuccess').style.display  = 'block';
-
-    // Отправляем форму
-    form.submit();
-
-    // Попытаемся отправить в Telegram (дополнительно)
-    const telegramMessage = `📬 Новая заявка на 8POINTS:\n\n👤 Имя: ${name}\n📧 Email: ${email}\n🏢 Компания: ${company || '—'}\n📞 Телефон: ${phone}\n💬 Сообщение: ${message}`;
-    fetch(`https://api.telegram.org/bot8220068671:AAG3wv_nbQJ0exwzQ4xFbDr-LF3FlwvMZKQ/sendMessage`, {
+    // 2. Telegram
+    const telegramText = `📬 <b>Новая заявка на 8POINTS</b>\n\n👤 <b>Имя:</b> ${name}\n📧 <b>Email:</b> ${email}\n🏢 <b>Компания:</b> ${company || '—'}\n📞 <b>Телефон:</b> ${phone}\n💬 <b>Сообщение:</b> ${message || '—'}`;
+    await fetch('https://api.telegram.org/bot8220068671:AAG3wv_nbQJ0exwzQ4xFbDr-LF3FlwvMZKQ/sendMessage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: '1952905232',
-        text: telegramMessage,
-        parse_mode: 'HTML'
-      })
-    }).catch(err => console.log('Telegram: уведомление не отправлено'));
+      body: JSON.stringify({ chat_id: '1952905232', text: telegramText, parse_mode: 'HTML' })
+    }).catch(() => {});
+
+    // Показываем успех
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('formSuccess').style.display  = 'block';
   }
 
   function showError(msg) {
