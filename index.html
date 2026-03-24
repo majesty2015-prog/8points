@@ -750,7 +750,7 @@
   const hamburger    = document.getElementById('hamburger');
   const mobileMenu   = document.getElementById('mobileMenu');
   const mobileClose  = document.getElementById('mobileClose');
-  hamburger.addEventListener('click',   () => mobileMenu.classList.add('open'));
+  hamburger.addEventListener('click',   () => mobileMenu.classList.toggle('open'));
   mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
   document.querySelectorAll('.mob-link, .mobile-menu .btn').forEach(el =>
     el.addEventListener('click', () => mobileMenu.classList.remove('open'))
@@ -803,7 +803,7 @@
     fetch('https://script.google.com/macros/s/AKfycbx8YC7Fkr1bWwUvvjOf0m5pmfu-ywvFSUupVvIX9WUgaRjeyR53XsZKSj_7OkgnwXE/exec', {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({ name, email, company: company || '—', phone, message })
     }).catch(() => {});
 
