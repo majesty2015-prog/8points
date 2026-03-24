@@ -92,9 +92,9 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: #fff; }
-    .nav-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; margin-right: 16px; }
+    .nav-contact { display: flex; flex-direction: column; align-items: center; gap: 1px; }
     .nav-city { color: rgba(255,255,255,0.4); font-size: 0.72rem; letter-spacing: 0.08em; }
-    .nav-phone { color: rgba(255,255,255,0.85); font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+    .nav-phone { color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
     .nav-phone:hover { color: #fff; }
     .nav-cta { padding: 10px 20px; font-size: 0.88rem; }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
@@ -412,7 +412,7 @@
     }
     @media (max-width: 768px) {
       section { padding: 72px 20px; }
-      .nav-links, .nav-cta-wrap { display: none; }
+      .nav-links, .nav-contact { display: none; }
       .hamburger { display: flex; }
       .hero { padding: 100px 20px 72px; }
       .pricing-card { padding: 40px 28px; }
@@ -441,11 +441,11 @@
       <li><a href="#pricing">Стоимость</a></li>
       <li><a href="#about">О компании</a></li>
     </ul>
+    <div class="nav-contact">
+      <span class="nav-city">г. Краснодар</span>
+      <a href="tel:+79528121977" class="nav-phone">+7 (952) 812-19-77</a>
+    </div>
     <div class="nav-cta-wrap">
-      <div class="nav-contact">
-        <span class="nav-city">г. Краснодар</span>
-        <a href="tel:+79528121977" class="nav-phone">+7 (952) 812-19-77</a>
-      </div>
       <a href="tel:+79528121977" class="btn btn-primary nav-cta">Связаться</a>
     </div>
     <div class="hamburger" id="hamburger" aria-label="Меню">
