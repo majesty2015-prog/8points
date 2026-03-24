@@ -3,7 +3,7 @@ Allow: /
 Disallow: /admin
 Disallow: /*.pdf$
 
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://8points.site/sitemap.xml
 
 # Яндекс
 User-agent: Yandex
