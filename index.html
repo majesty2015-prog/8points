@@ -791,6 +791,12 @@
 
   // ── Form submit ──
   async function submitForm() {
+    const today = new Date().toDateString();
+    if (localStorage.getItem('8p_submitted') === today) {
+      showError('Вы уже отправляли заявку сегодня. Мы свяжемся с вами в ближайшее время.');
+      return;
+    }
+
     const name    = document.getElementById('f-name').value.trim();
     const email   = document.getElementById('f-email').value.trim();
     const company = document.getElementById('f-company').value.trim();
@@ -824,6 +830,7 @@
     }).catch(() => {});
 
     // Показываем успех
+    localStorage.setItem('8p_submitted', today);
     document.getElementById('formContent').style.display = 'none';
     document.getElementById('formSuccess').style.display  = 'block';
   }
