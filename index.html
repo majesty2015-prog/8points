@@ -833,15 +833,15 @@
       body: JSON.stringify({ name, email, company: company || '—', phone, message })
     }).catch(() => {});
 
-    // 2. Telegram
+    // 2. Telegram (fire-and-forget, не ждём ответа)
     const telegramText = `📬 <b>Новая заявка на 8POINTS</b>\n\n👤 <b>Имя:</b> ${name}\n📧 <b>Email:</b> ${email}\n🏢 <b>Компания:</b> ${company || '—'}\n📞 <b>Телефон:</b> ${phone}\n💬 <b>Сообщение:</b> ${message || '—'}`;
-    await fetch('https://api.telegram.org/bot8220068671:AAG3wv_nbQJ0exwzQ4xFbDr-LF3FlwvMZKQ/sendMessage', {
+    fetch('https://api.telegram.org/bot8220068671:AAG3wv_nbQJ0exwzQ4xFbDr-LF3FlwvMZKQ/sendMessage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: '1952905232', text: telegramText, parse_mode: 'HTML' })
     }).catch(() => {});
 
-    // Показываем успех
+    // Показываем успех сразу
     localStorage.setItem('8p_submitted', today);
     document.getElementById('formContent').style.display = 'none';
     document.getElementById('formSuccess').style.display  = 'block';
