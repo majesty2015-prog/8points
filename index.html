@@ -278,10 +278,13 @@
     .diff-icon { flex-shrink: 0; margin-top: 2px; font-style: normal; }
 
     /* ── PRICING ── */
+    .pricing-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 28px; max-width: 1120px; margin: 56px auto 0; align-items: start;
+    }
     .pricing-card {
-      max-width: 660px; margin: 56px auto 0;
       background: var(--white); border: 1px solid var(--border);
-      border-radius: 24px; padding: 56px 52px;
+      border-radius: 24px; padding: 52px 44px;
       text-align: center; position: relative; overflow: hidden;
     }
     .pricing-card::before {
@@ -289,16 +292,37 @@
       position: absolute; top: 0; left: 0; right: 0; height: 3px;
       background: linear-gradient(90deg, var(--accent), #818CF8);
     }
+    .pricing-card--featured {
+      background: var(--bg-dark); border-color: rgba(79,70,229,0.5);
+      box-shadow: 0 0 40px rgba(79,70,229,0.15);
+    }
+    .pricing-card--featured::before { height: 4px; background: linear-gradient(90deg, #818CF8, var(--accent)); }
+    .pricing-card--featured .pricing-name  { color: rgba(255,255,255,0.5); }
+    .pricing-card--featured .pricing-price { color: #fff; }
+    .pricing-card--featured .pricing-subtitle { color: rgba(255,255,255,0.7); }
+    .pricing-card--featured .pricing-note  { color: rgba(255,255,255,0.45); }
+    .pricing-card--featured .pricing-list li { color: rgba(255,255,255,0.7); }
+    .pricing-card--featured .pricing-list li::before { color: #818CF8; }
+    .pricing-badge {
+      display: inline-block; background: linear-gradient(90deg, var(--accent), #818CF8);
+      color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; border-radius: 20px; padding: 4px 14px;
+      margin-bottom: 20px;
+    }
     .pricing-name {
       font-family: var(--font-sans); font-size: 0.78rem; font-weight: 600;
       letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--text-muted); margin-bottom: 16px;
     }
     .pricing-price {
-      font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 900;
+      font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 900;
       font-family: var(--font-serif); color: var(--text); margin-bottom: 8px;
     }
-    .pricing-note { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 40px; }
+    .pricing-subtitle {
+      font-size: 0.93rem; color: var(--text-muted);
+      line-height: 1.55; margin-bottom: 16px;
+    }
+    .pricing-note { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 36px; }
     .pricing-list { list-style: none; text-align: left; margin: 0 0 40px; display: grid; gap: 13px; }
     .pricing-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.93rem; color: var(--text-muted); }
     .pricing-list li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
@@ -448,6 +472,7 @@
       .nav-phone { font-size: 0.78rem; }
       .hamburger { display: flex; }
       .hero { padding: 100px 20px 72px; }
+      .pricing-grid { grid-template-columns: 1fr; }
       .pricing-card { padding: 40px 28px; }
       .contact-form { padding: 36px 26px; }
       .about-stats { grid-template-columns: 1fr 1fr; }
@@ -646,20 +671,46 @@
   <div class="container">
     <span class="section-label" style="text-align:center;display:block">Стоимость</span>
     <h2 style="text-align:center;margin-bottom:0">Прозрачная цена</h2>
-    <div class="pricing-card fade-up">
-      <div class="pricing-name">Диагностика бизнес-процессов</div>
-      <!-- TODO: замените стоимость на актуальную -->
-      <div class="pricing-price">от 30 000 ₽</div>
-      <p class="pricing-note">Итоговая стоимость зависит от масштаба бизнеса</p>
-      <ul class="pricing-list">
-        <li>Предварительный 30-минутный созвон</li>
-        <li>Анализ распределения ресурсов снаружи и изнутри</li>
-        <li>Выявление точек потерь — где уходят деньги и усилия</li>
-        <li>Определение точек недовложения и роста</li>
-        <li>Итоговый разбор с конкретным планом изменений</li>
-        <li>Ответы на вопросы</li>
-      </ul>
-      <a href="tel:+79528121977" class="btn btn-dark btn-submit">Узнать стоимость</a>
+    <div class="pricing-grid">
+
+      <!-- Карточка 1: Малый и средний бизнес -->
+      <div class="pricing-card fade-up">
+        <div class="pricing-name">Диагностика бизнес-процессов малого и среднего бизнеса</div>
+        <div class="pricing-price">от 30 000 ₽</div>
+        <p class="pricing-note">Итоговая стоимость зависит от масштаба бизнеса</p>
+        <ul class="pricing-list">
+          <li>Предварительный 30-минутный созвон</li>
+          <li>Анализ распределения ресурсов снаружи и изнутри</li>
+          <li>Выявление точек потерь — где уходят деньги и усилия</li>
+          <li>Определение точек недовложения и роста</li>
+          <li>Итоговый разбор с конкретным планом изменений</li>
+          <li>Ответы на вопросы</li>
+        </ul>
+        <a href="tel:+79528121977" class="btn btn-dark btn-submit">Узнать стоимость</a>
+      </div>
+
+      <!-- Карточка 2: Крупный бизнес (выделенная) -->
+      <div class="pricing-card pricing-card--featured fade-up">
+        <div class="pricing-badge">Для крупного бизнеса</div>
+        <div class="pricing-name">Диагностика крупного бизнеса</div>
+        <div class="pricing-price">от 170 000 ₽</div>
+        <p class="pricing-subtitle">Находим точки потерь прибыли, которые съедают до 30% годового бюджета из-за человеческого фактора</p>
+        <p class="pricing-note">Итоговая стоимость зависит от масштаба и структуры компании</p>
+        <ul class="pricing-list">
+          <li>Предварительный 30-минутный созвон</li>
+          <li>Анализ распределения ресурсов снаружи и изнутри</li>
+          <li>Выявление точек потерь — где уходят деньги и усилия</li>
+          <li>Определение точек недовложения и роста</li>
+          <li>Глубинные интервью с ключевыми сотрудниками — не только с руководством</li>
+          <li>Картирование процессов AS IS по всем ключевым отделам</li>
+          <li>Анализ узких мест и зон системного сбоя</li>
+          <li>Приоритизированный план изменений с оценкой ресурсов на внедрение</li>
+          <li>Итоговый разбор с конкретным планом изменений</li>
+          <li>Сопровождение после разбора — 60 дней Q&amp;A</li>
+        </ul>
+        <a href="tel:+79528121977" class="btn btn-primary btn-submit">Узнать стоимость</a>
+      </div>
+
     </div>
   </div>
 </section>
