@@ -340,12 +340,13 @@
     }
     .about-inner {
       max-width: var(--max-w); margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
       position: relative; z-index: 1;
     }
     .about .section-label { color: #818CF8; }
     .about h2 { color: #fff; margin-bottom: 24px; }
-    .about-text p { color: rgba(255,255,255,0.5); font-size: 0.97rem; line-height: 1.8; margin-bottom: 18px; }
+    .about-text p { color: rgba(255,255,255,0.5); font-size: 0.97rem; line-height: 1.8; margin-bottom: 18px; max-width: 820px; }
+    .about-text h3 { color: #fff; font-size: 1.15rem; font-weight: 700; margin: 40px 0 12px; font-family: var(--font-sans); }
+    .about-from { font-size: 0.82rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 32px; display: block; }
     .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .stat-item {
       background: rgba(255,255,255,0.04);
@@ -459,7 +460,7 @@
       .steps { grid-template-columns: repeat(2, 1fr); }
       .step:nth-child(2) { border-right: none; }
       .step:nth-child(1), .step:nth-child(2) { border-bottom: 1px solid var(--border); }
-      .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .about-inner { gap: 48px; }
       .contact-inner { grid-template-columns: 1fr; gap: 48px; }
       .diff-grid { grid-template-columns: 1fr; }
       .diff-col-freelance { order: 3; }
@@ -475,7 +476,6 @@
       .pricing-grid { grid-template-columns: 1fr; }
       .pricing-card { padding: 40px 28px; }
       .contact-form { padding: 36px 26px; }
-      .about-stats { grid-template-columns: 1fr 1fr; }
       .form-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
@@ -718,38 +718,28 @@
   <div class="about-inner">
     <div class="about-text fade-up">
       <span class="section-label">О компании</span>
-      <h2>Аналитика —<br>это склад ума,<br><em>не профессия.</em></h2>
+      <h2>От основателя<br>8 ПОИНТС</h2>
+      <span class="about-from">16 лет в бизнесе, из них 6 — внутри эталонной системы IKEA</span>
       <p>
-        8 ПОИНТС — это не агентство с десятками сотрудников и типовыми методологиями.
-        Это один аналитик с глубокой аналитической структурой мышления и многопрофильным 16-летним опытом, в том числе в маркетинге и международной компании с известной историей.
+        Я прошла путь от операционных задач до стратегической аналитики в ритейле, маркетинге и управлении процессами. Работала с бизнесами разного масштаба и на разных уровнях — и каждый раз видела одно и то же: компании теряют деньги не там, где думают.
       </p>
       <p>
-        <i>«В хаотичных и непрозрачных ситуациях я нахожу суть. Вижу причинно-следственные связи
-        там, где другие их не видят. Именно это позволяет мне точно определить, где бизнес
-        теряет и где недополучает», </i>- Наталия Акинина, аналитик бизнес-процессов.
+        Ключевой этап моей карьеры — 6 лет в IKEA, компании, которую весь мир знает за безупречно выстроенные процессы. Именно там я увидела, как выглядит система, в которой каждое звено работает на результат. И именно этот опыт лёг в основу моего подхода к диагностике: я знаю, как должно быть устроено — и быстро нахожу, где у вас устроено иначе.
+      </p>
+      <h3>Почему диагностика, а не консалтинг</h3>
+      <p>
+        Большинство консалтинговых компаний продают объём: месяцы работы, команды аналитиков, толстые отчёты. Я работаю иначе. В основе — авторская методология из 8 ключевых векторов анализа, которая позволяет быстро и точно определить, где в операционке бизнеса слабые места.
       </p>
       <p>
-        Мы работаем с компаниями, которые застряли на плато или медленно теряют прибыль —
-        и хотят понять почему, не вкладывая в это ощутимый бюджет на консалтинг.
+        Я смотрю на компанию одновременно глазами клиента, сотрудника и собственника. Не для того, чтобы написать красивый документ, — а чтобы дать конкретный план: что менять, в каком порядке и почему.
       </p>
-    </div>
-    <div class="about-stats">
-      <div class="stat-item fade-up">
-        <span class="stat-num">8</span>
-        <span class="stat-lbl">ключевых векторов анализа в каждой диагностике</span>
-      </div>
-      <div class="stat-item fade-up">
-        <span class="stat-num">1</span>
-        <span class="stat-lbl">специалист без посредников — полная ответственность</span>
-      </div>
-      <div class="stat-item fade-up">
-        <span class="stat-num">16</span>
-        <span class="stat-lbl">лет опыта в аналитике, маркетинге, ритейле</span>
-      </div>
-      <div class="stat-item fade-up">
-        <span class="stat-num">в&nbsp;5–10×</span>
-        <span class="stat-lbl">доступнее стандартного консалтинга</span>
-      </div>
+      <h3>Пилотный формат для первых клиентов</h3>
+      <p>
+        8 ПОИНТС — молодая компания, и я это не скрываю. Но за моей диагностикой стоят 16 лет практического опыта и система, отточенная в одной из самых процессно-зрелых компаний мира.
+      </p>
+      <p>
+        Первым клиентам я предлагаю пилотную диагностику на специальных условиях — это возможность получить результат с минимальным порогом входа и убедиться в подходе на практике.
+      </p>
     </div>
   </div>
 </section>
