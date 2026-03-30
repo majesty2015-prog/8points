@@ -103,6 +103,7 @@
     }
     .logo span:not(.logo-8) { color: var(--accent); }
     .logo-8 { display: inline-block; color: #fff; animation: spin8 12s ease-in-out infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes spin8 {
       0%     { transform: rotate(0deg); }    /* вертикально */
       58.33% { transform: rotate(0deg); }    /* 7s стоит */
@@ -818,7 +819,7 @@
             <a href="personal-data.html" target="_blank" rel="noopener">Политикой обработки персональных данных</a>
           </label>
         </div>
-        <button class="btn btn-primary btn-submit" onclick="submitForm()">
+        <button id="btn-submit" class="btn btn-primary btn-submit" onclick="submitForm()">
           Найти точки роста
         </button>
       </div>
@@ -917,9 +918,9 @@
     if (!phone)                        { showError('Пожалуйста, введите ваш телефон');                       return; }
     if (!consent)                      { showError('Необходимо согласие на обработку персональных данных'); return; }
 
-    const btn = document.querySelector('.btn-submit');
+    const btn = document.getElementById('btn-submit');
     btn.disabled = true;
-    btn.textContent = 'Отправляем...';
+    btn.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px;"></span>Отправляем...';
 
     try {
       const res = await fetch('/api/submit', {
