@@ -920,26 +920,23 @@
     btn.disabled = true;
     btn.textContent = 'Отправляем...';
 
-    // 1. Google Sheets
-    fetch('https://script.google.com/macros/s/AKfycbyEokksbH7xN7b7xTBSViqphEiibnJkEHO9ul_phkeE6SHRqKlErbIE83aryc2uZ6fl/exec', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ name, email, company: company || '—', phone, message })
-    }).catch(() => {});
+    try {
+      const res = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, company: company || '—', phone, message: message || '—' })
+      });
 
-    // 2. Telegram (fire-and-forget, не ждём ответа)
-    const telegramText = `📬 <b>Новая заявка на 8POINTS</b>\n\n👤 <b>Имя:</b> ${name}\n📧 <b>Email:</b> ${email}\n🏢 <b>Компания:</b> ${company || '—'}\n📞 <b>Телефон:</b> ${phone}\n💬 <b>Сообщение:</b> ${message || '—'}`;
-    fetch('https://api.telegram.org/bot8220068671:AAG3wv_nbQJ0exwzQ4xFbDr-LF3FlwvMZKQ/sendMessage', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: '1952905232', text: telegramText, parse_mode: 'HTML' })
-    }).catch(() => {});
+      if (!res.ok) throw new Error('Server error');
 
-    // Показываем успех сразу
-    localStorage.setItem('8p_submitted', today);
-    document.getElementById('formContent').style.display = 'none';
-    document.getElementById('formSuccess').style.display  = 'block';
+      localStorage.setItem('8p_submitted', today);
+      document.getElementById('formContent').style.display = 'none';
+      document.getElementById('formSuccess').style.display  = 'block';
+    } catch (e) {
+      showError('Не удалось отправить заявку. Позвоните нам: +7 (952) 812-19-77');
+      btn.disabled = false;
+      btn.textContent = 'Найти точки роста';
+    }
   }
 
   // ── Cookie banner ──
