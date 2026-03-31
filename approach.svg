@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d1a"/>
+      <stop offset="100%" style="stop-color:#08080F"/>
+    </linearGradient>
+    <linearGradient id="glow2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:0.28"/>
+      <stop offset="100%" style="stop-color:#4F46E5;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="800" fill="url(#bg2)"/>
+  <circle cx="140" cy="180" r="280" fill="url(#glow2)"/>
+
+  <!-- Label -->
+  <text x="80" y="82" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="12" fill="#4F46E5" letter-spacing="3">НАШИ ПРИНЦИПЫ</text>
+
+  <!-- Title -->
+  <text x="80" y="122" font-family="Georgia, serif" font-weight="700" font-size="33" fill="#ffffff">В чём уникальность</text>
+  <text x="80" y="158" font-family="Georgia, serif" font-weight="700" font-size="33" fill="#4F46E5">нашего подхода</text>
+
+  <!-- Divider -->
+  <line x1="80" y1="175" x2="210" y2="175" stroke="#4F46E5" stroke-width="2"/>
+
+  <!-- ── Item 1 ── -->
+  <text x="80" y="207" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="15" fill="#4F46E5">01</text>
+  <text x="112" y="207" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="14" fill="rgba(255,255,255,0.92)">Объективный аудит 360° с трёх позиций:</text>
+  <text x="112" y="226" font-family="Inter, Arial, sans-serif" font-size="13.5" fill="rgba(255,255,255,0.5)">клиент, сотрудник, собственник — позволяет увидеть</text>
+  <text x="112" y="244" font-family="Inter, Arial, sans-serif" font-size="13.5" fill="rgba(255,255,255,0.5)">«слепые зоны», через которые уходят деньги.</text>
+
+  <!-- ── Item 2 ── -->
+  <text x="80" y="284" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="15" fill="#4F46E5">02</text>
+  <text x="112" y="284" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="14" fill="rgba(255,255,255,0.92)">Индивидуальный анализ критических узлов</text>
+  <text x="112" y="303" font-family="Inter, Arial, sans-serif" font-size="13.5" fill="rgba(255,255,255,0.5)">именно в вашей бизнес-модели — те 20% настроек,</text>
+  <text x="112" y="321" font-family="Inter, Arial, sans-serif" font-size="13.5" fill="rgba(255,255,255,0.5)">которые дадут 80% результата.</text>
+
+  <!-- ── Item 3 ── -->
+  <text x="80" y="361" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="15" fill="#4F46E5">03</text>
+  <text x="112" y="361" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="14" fill="rgba(255,255,255,0.92)">Инвестиции вместо экономии:</text>
+  <text x="112" y="380" font-family="Inter, Arial, sans-serif" font-size="13.5" fill="rgba(255,255,255,0.5)">мы не ищем, где «подрезать» косты — находим,</text>
+  <text x="112" y="398" font-family="Inter, Arial, sans-serif" font-size="13.5" fill="rgba(255,255,255,0.5)">куда прицелить ваши ресурсы, чтобы они начали</text>
+  <text x="112" y="416" font-family="Inter, Arial, sans-serif" font-size="13.5" fill="rgba(255,255,255,0.5)">генерировать кратную прибыль.</text>
+
+  <!-- ── Item 4 ── -->
+  <text x="80" y="456" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="15" fill="#4F46E5">04</text>
+  <text x="112" y="456" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="14" fill="rgba(255,255,255,0.92)">Консалтинг внедрения, а не отчётов —</text>
+  <text x="112" y="475" font-family="Inter, Arial, sans-serif" font-size="13.5" fill="rgba(255,255,255,0.5)">вместо теории вы получаете сфокусированный</text>
+  <text x="112" y="493" font-family="Inter, Arial, sans-serif" font-size="13.5" fill="rgba(255,255,255,0.5)">план действий, который можно запустить в работу</text>
+  <text x="112" y="511" font-family="Inter, Arial, sans-serif" font-size="13.5" fill="rgba(255,255,255,0.5)">на следующее утро.</text>
+
+  <!-- Bottom separator -->
+  <line x1="80" y1="556" x2="720" y2="556" stroke="rgba(79,70,229,0.2)" stroke-width="1"/>
+
+  <!-- Brand -->
+  <text x="80" y="748" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="18" fill="rgba(255,255,255,0.9)" letter-spacing="2">8 <tspan fill="#4F46E5">ПОИНТС</tspan></text>
+
+  <!-- Decorative dots -->
+  <circle cx="660" cy="100" r="3" fill="#4F46E5" opacity="0.5"/>
+  <circle cx="682" cy="118" r="2" fill="#4F46E5" opacity="0.3"/>
+  <circle cx="700" cy="94" r="4" fill="#4F46E5" opacity="0.2"/>
+  <circle cx="642" cy="128" r="2" fill="#4F46E5" opacity="0.4"/>
+  <circle cx="718" cy="138" r="3" fill="#4F46E5" opacity="0.3"/>
+
+  <!-- Decorative rings (bottom right) -->
+  <circle cx="660" cy="670" r="115" fill="none" stroke="rgba(79,70,229,0.07)" stroke-width="1"/>
+  <circle cx="660" cy="670" r="85"  fill="none" stroke="rgba(79,70,229,0.09)" stroke-width="1"/>
+  <circle cx="660" cy="670" r="55"  fill="none" stroke="rgba(79,70,229,0.12)" stroke-width="1"/>
+  <circle cx="660" cy="670" r="25"  fill="rgba(79,70,229,0.14)"/>
+  <circle cx="660" cy="670" r="6"   fill="#4F46E5" opacity="0.55"/>
+</svg>
