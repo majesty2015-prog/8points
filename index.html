@@ -495,6 +495,16 @@
     }
     #cookieAccept:hover { opacity: 0.85; }
 
+    /* ── TOUCH: мгновенный отклик на мобильных ── */
+    @media (hover: none) {
+      .problem-card:active { box-shadow: 0 16px 48px rgba(0,0,0,0.07); border-color: var(--accent); transform: translateY(-2px); }
+      .feature-item:active { background: var(--bg-dark-2); }
+      .step:active { background: #FAFAF7; }
+      .btn-primary:active { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(79,70,229,0.3); }
+      .btn-outline:active { border-color: rgba(255,255,255,0.65); }
+      .btn-dark:active { background: #1a1a2e; transform: translateY(-1px); }
+    }
+
     /* ── ANIMATIONS ── */
     .fade-up { opacity: 0; transform: translateY(22px); }
     .fade-up.visible {
