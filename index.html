@@ -390,6 +390,17 @@
     .about-text h3 { color: #fff; font-size: 1.15rem; font-weight: 700; margin: 40px 0 12px; font-family: var(--font-sans); }
     .about-from { font-size: 0.82rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 32px; display: block; }
     .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .about-accordion { margin: 28px 0 36px; max-width: 820px; display: flex; flex-direction: column; gap: 10px; }
+    .about-accordion details { border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+    .about-accordion details[open] { border-color: rgba(79,70,229,0.4); }
+    .about-accordion summary { list-style: none; cursor: pointer; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    .about-accordion summary::-webkit-details-marker { display: none; }
+    .about-accordion summary .acc-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #818CF8; font-family: var(--font-sans); }
+    .about-accordion summary .acc-icon { width: 20px; height: 20px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.25s, border-color 0.25s; }
+    .about-accordion summary .acc-icon::after { content: '+'; color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1; }
+    .about-accordion details[open] summary .acc-icon { transform: rotate(45deg); border-color: #818CF8; }
+    .about-accordion details[open] summary .acc-icon::after { color: #818CF8; }
+    .about-accordion .acc-body { padding: 0 20px 18px; color: rgba(255,255,255,0.5); font-size: 0.97rem; line-height: 1.8; }
     .stat-item {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.07);
@@ -771,6 +782,22 @@
       <p>
         Ключевой этап моей карьеры — 6 лет в IKEA, компании, которую весь мир знает за безупречно выстроенные процессы. Именно там я увидела, как выглядит система, в которой каждое звено работает на результат. И именно этот опыт лёг в основу моего подхода к диагностике: я знаю, как должно быть устроено — и быстро нахожу, где у других устроено иначе.
       </p>
+      <div class="about-accordion">
+        <details>
+          <summary>
+            <span class="acc-title">Миссия</span>
+            <span class="acc-icon"></span>
+          </summary>
+          <div class="acc-body">Бизнес не должен терять деньги на процессы, которые не работают. Моя задача — находить эти потери и показывать, куда перенаправить ресурсы, чтобы усилия давали лучший результат. Быстро, честно и без бюрократии.</div>
+        </details>
+        <details>
+          <summary>
+            <span class="acc-title">Цель</span>
+            <span class="acc-icon"></span>
+          </summary>
+          <div class="acc-body">Находить, где компании теряют ресурсы, через глубокую диагностику бизнес-процессов глазами клиента, сотрудника и собственника — и давать конкретный план изменений.</div>
+        </details>
+      </div>
       <span class="about-from">Почему диагностика, а не консалтинг</span>
       <p>
         Большинство консалтинговых компаний продают объём: месяцы работы, команды аналитиков, толстые отчёты. Я работаю иначе. В основе — авторская методология из 8 ключевых векторов анализа, которая позволяет быстро и точно определить, где в операционке бизнеса слабые места.
