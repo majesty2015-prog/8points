@@ -184,6 +184,7 @@
     }
     .hero h1 { color: #fff; max-width: 800px; margin-bottom: 28px; }
     .hero h1 em { font-style: italic; color: #818CF8; }
+    .hero-nowrap { white-space: nowrap; }
     .hero-sub {
       font-size: clamp(1rem, 1.7vw, 1.18rem);
       color: rgba(255,255,255,0.5);
@@ -519,6 +520,7 @@
       .diff-col-freelance { order: 3; }
     }
     @media (max-width: 768px) {
+      .hero-nowrap { white-space: normal; }
       section { padding: 72px 20px; }
       .nav-links, .nav-cta-wrap { display: none; }
       .nav-contact { display: flex; align-items: flex-end; }
@@ -579,7 +581,7 @@
 <section class="hero" id="home">
   <div class="hero-inner">
     <div class="hero-label">Диагностика бизнес-процессов</div>
-    <h1>Плато прибыли — это <em>симптом.</em><br>Найдём причину</h1>
+    <h1>Плато прибыли — это <em>симптом.</em><br><span class="hero-nowrap">Найдём причину</span></h1>
     <p class="hero-sub">
       Покажем, где ваш бизнес теряет деньги, ресурсы и рост —
 даже если внешне всё работает. Без сложных отчётов и абстрактных рекомендаций, а с конкретным планом изменений.
