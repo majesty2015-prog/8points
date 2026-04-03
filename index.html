@@ -560,6 +560,22 @@
       .hero-actions { flex-direction: column; align-items: flex-start; }
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
     }
+    @media (max-width: 600px) {
+      .modal-overlay {
+        align-items: flex-start;
+        overflow-y: auto;
+        padding: 12px;
+      }
+      .modal-box {
+        padding: 20px 20px 28px;
+        border-radius: 16px;
+        margin: 0 auto;
+      }
+      .modal-close {
+        top: 12px; right: 14px;
+        font-size: 1.7rem; padding: 6px 10px;
+      }
+    }
   </style>
 </head>
 <body>
