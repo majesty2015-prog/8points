@@ -957,46 +957,53 @@
 </div>
 
 <script>
+  // ── Scroll animations (первым — критично для видимости сайта) ──
+  try {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const siblings = Array.from(entry.target.parentNode.children);
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), Math.min(idx * 90, 270));
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  } catch(e) {}
+
   // ── Nav scroll ──
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  }, { passive: true });
+  try {
+    const nav = document.getElementById('nav');
+    if (nav) window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+  } catch(e) {}
 
   // ── Mobile menu ──
-  const hamburger    = document.getElementById('hamburger');
-  const mobileMenu   = document.getElementById('mobileMenu');
-  const mobileClose  = document.getElementById('mobileClose');
-  hamburger.addEventListener('click',   () => mobileMenu.classList.toggle('open'));
-  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-  document.querySelectorAll('.mob-link, .mobile-menu .btn').forEach(el =>
-    el.addEventListener('click', () => mobileMenu.classList.remove('open'))
-  );
+  try {
+    const hamburger   = document.getElementById('hamburger');
+    const mobileMenu  = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    if (hamburger && mobileMenu)  hamburger.addEventListener('click',   () => mobileMenu.classList.toggle('open'));
+    if (mobileClose && mobileMenu) mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    document.querySelectorAll('.mob-link, .mobile-menu .btn').forEach(el =>
+      el.addEventListener('click', () => mobileMenu && mobileMenu.classList.remove('open'))
+    );
+  } catch(e) {}
 
-  // ── Scroll animations ──
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const siblings = Array.from(entry.target.parentNode.children);
-      const idx = siblings.indexOf(entry.target);
-      setTimeout(() => entry.target.classList.add('visible'), Math.min(idx * 90, 270));
-      observer.unobserve(entry.target);
+  // ── Smooth anchor scroll ──
+  try {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href === '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' });
+      });
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
-
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  // ── Smooth anchor scroll (offset for fixed nav) ──
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (href === '#') return;
-      const target = document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' });
-    });
-  });
+  } catch(e) {}
 
   // ── Form submit ──
   async function submitForm() {
@@ -1042,14 +1049,20 @@
   }
 
   // ── Cookie banner ──
-  (function() {
+  try {
     const banner = document.getElementById('cookieBanner');
-    if (localStorage.getItem('cookieAccepted')) { banner.style.display = 'none'; return; }
-    document.getElementById('cookieAccept').addEventListener('click', function() {
-      localStorage.setItem('cookieAccepted', '1');
-      banner.style.display = 'none';
-    });
-  })();
+    if (banner) {
+      if (localStorage.getItem('cookieAccepted')) {
+        banner.style.display = 'none';
+      } else {
+        const acceptBtn = document.getElementById('cookieAccept');
+        if (acceptBtn) acceptBtn.addEventListener('click', function() {
+          try { localStorage.setItem('cookieAccepted', '1'); } catch(e) {}
+          banner.style.display = 'none';
+        });
+      }
+    }
+  } catch(e) {}
 
   // ── Checklist modal ──
   function openChecklistModal() {
