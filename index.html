@@ -479,16 +479,24 @@
     #cookieBanner {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
       background: #13131f; border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 16px 24px; display: flex; align-items: center; justify-content: center;
-      gap: 20px; flex-wrap: wrap; font-size: 0.83rem; color: rgba(255,255,255,0.6);
+      padding: 12px 20px; display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; font-size: 0.8rem; color: rgba(255,255,255,0.6);
     }
+    #cookieBanner span { flex: 1; line-height: 1.45; }
     #cookieBanner a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
     #cookieAccept {
       background: var(--accent); color: #fff; border: none; border-radius: 8px;
-      padding: 8px 22px; font-size: 0.83rem; font-weight: 600; cursor: pointer;
-      white-space: nowrap; transition: opacity 0.2s;
+      padding: 8px 18px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+      white-space: nowrap; flex-shrink: 0; transition: opacity 0.2s;
     }
     #cookieAccept:hover { opacity: 0.85; }
+    @media (max-width: 600px) {
+      #cookieBanner {
+        flex-direction: column; align-items: flex-start; gap: 10px; padding: 12px 16px;
+        font-size: 0.75rem;
+      }
+      #cookieAccept { align-self: flex-end; padding: 7px 18px; }
+    }
 
     /* ── TOUCH: мгновенный отклик на мобильных ── */
     @media (hover: none) {
@@ -944,7 +952,7 @@
 
 <!-- ═══ COOKIE BANNER ═══ -->
 <div id="cookieBanner">
-  <span>Мы используем cookie, это позволяет нам анализировать взаимодействие посетителей с сайтом. Продолжая пользоваться сайтом, Вы соглашаетесь с использованием файлов cookie и выражаете своё <a href="agreement.html" target="_blank" rel="noopener">согласие</a> на <a href="personal-data.html" target="_blank" rel="noopener">обработку Ваших персональных данных</a> согласно <a href="privacy.html" target="_blank" rel="noopener">Политике</a>. Запретить обработку cookie можно через браузер.</span>
+  <span>Сайт использует cookie. Продолжая пользоваться сайтом, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a>.</span>
   <button id="cookieAccept">Принять</button>
 </div>
 
