@@ -478,9 +478,10 @@
 
     /* ── COOKIE BANNER ── */
     #cookieBanner {
+      display: none; /* показывается только через JS после загрузки страницы */
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
       background: #13131f; border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 12px 20px; display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px; align-items: center; justify-content: space-between;
       gap: 12px; font-size: 0.8rem; color: rgba(255,255,255,0.6);
     }
     #cookieBanner span { flex: 1; line-height: 1.45; }
@@ -1051,21 +1052,20 @@
     }
   }
 
-  // ── Cookie banner ──
-  try {
-    const banner = document.getElementById('cookieBanner');
-    if (banner) {
-      if (localStorage.getItem('cookieAccepted')) {
+  // ── Cookie banner — показываем только после полной загрузки страницы ──
+  window.addEventListener('load', function() {
+    try {
+      const banner = document.getElementById('cookieBanner');
+      if (!banner) return;
+      if (localStorage.getItem('cookieAccepted')) return; // уже принято — не показываем
+      banner.style.display = 'flex'; // показываем баннер
+      const acceptBtn = document.getElementById('cookieAccept');
+      if (acceptBtn) acceptBtn.addEventListener('click', function() {
+        try { localStorage.setItem('cookieAccepted', '1'); } catch(e) {}
         banner.style.display = 'none';
-      } else {
-        const acceptBtn = document.getElementById('cookieAccept');
-        if (acceptBtn) acceptBtn.addEventListener('click', function() {
-          try { localStorage.setItem('cookieAccepted', '1'); } catch(e) {}
-          banner.style.display = 'none';
-        });
-      }
-    }
-  } catch(e) {}
+      });
+    } catch(e) {}
+  });
 
   // ── Checklist modal ──
   function openChecklistModal() {
@@ -1188,15 +1188,19 @@
   </div>
 </div>
 
-  <!-- Yandex.Metrika counter -->
+  <!-- Yandex.Metrika counter — грузится после загрузки страницы, не блокирует -->
   <script type="text/javascript">
-      (function(m,e,t,r,i,k,a){
-          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-          m[i].l=1*new Date();
-          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108277136', 'ym');
-      ym(108277136, 'init', {clickmap:true, accurateTrackBounce:true, trackLinks:true});
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108277136', 'ym');
+        ym(108277136, 'init', {clickmap:true, accurateTrackBounce:true, trackLinks:true});
+      }, 2000);
+    });
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/108277136" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
