@@ -510,8 +510,8 @@
     }
 
     /* ── ANIMATIONS ── */
-    .fade-up { opacity: 0; transform: translateY(22px); }
-    .fade-up.visible {
+    .js-ready .fade-up { opacity: 0; transform: translateY(22px); }
+    .js-ready .fade-up.visible {
       opacity: 1; transform: none;
       transition: opacity 0.65s ease, transform 0.65s ease;
     }
@@ -957,7 +957,9 @@
 </div>
 
 <script>
-  // ── Scroll animations (первым — критично для видимости сайта) ──
+  // ── Scroll animations ──
+  // Добавляем класс только если JS выполнился — иначе весь контент остаётся видимым
+  document.documentElement.classList.add('js-ready');
   try {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
