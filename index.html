@@ -540,6 +540,14 @@
     .modal-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav {
+        background: rgba(8,8,15,0.95);
+        backdrop-filter: blur(12px);
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--border-light);
+      }
+    }
     @media (max-width: 960px) {
       .steps { grid-template-columns: repeat(2, 1fr); }
       .step:nth-child(2) { border-right: none; }
@@ -1052,20 +1060,18 @@
     }
   }
 
-  // ── Cookie banner — показываем только после полной загрузки страницы ──
-  window.addEventListener('load', function() {
-    try {
-      const banner = document.getElementById('cookieBanner');
-      if (!banner) return;
-      if (localStorage.getItem('cookieAccepted')) return; // уже принято — не показываем
-      banner.style.display = 'flex'; // показываем баннер
+  // ── Cookie banner ──
+  try {
+    const banner = document.getElementById('cookieBanner');
+    if (banner && !localStorage.getItem('cookieAccepted')) {
+      banner.style.display = 'flex';
       const acceptBtn = document.getElementById('cookieAccept');
       if (acceptBtn) acceptBtn.addEventListener('click', function() {
         try { localStorage.setItem('cookieAccepted', '1'); } catch(e) {}
         banner.style.display = 'none';
       });
-    } catch(e) {}
-  });
+    }
+  } catch(e) {}
 
   // ── Checklist modal ──
   function openChecklistModal() {
