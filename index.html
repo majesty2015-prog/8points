@@ -1127,13 +1127,6 @@
       });
     } catch (e) { /* даём PDF даже при ошибке отправки */ }
 
-    const a = document.createElement('a');
-    a.href = '/checklist.pdf';
-    a.download = 'Чек-лист 10 скрытых проблем бизнеса — 8ПОИНТС.pdf';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-
     try { localStorage.setItem(clKey, JSON.stringify({ email: email.toLowerCase(), date: today })); } catch(e) {}
 
     document.getElementById('modalFormContent').style.display = 'none';
@@ -1187,7 +1180,10 @@
     <div class="form-success" id="modalSuccess" style="display:none">
       <div class="success-icon">✓</div>
       <h3>Готово!</h3>
-      <p>Чек-лист скачивается автоматически. Если не началось — <a href="/checklist.pdf" download style="color:var(--accent)">нажмите здесь</a>.</p>
+      <p style="margin-bottom:24px">Нажмите кнопку ниже, чтобы скачать PDF</p>
+      <a href="/checklist.pdf" download="Чек-лист 8ПОИНТС.pdf" class="btn btn-primary btn-submit" style="text-decoration:none;display:flex">
+        Скачать чек-лист
+      </a>
     </div>
   </div>
 </div>
