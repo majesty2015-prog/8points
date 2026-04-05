@@ -1,0 +1,17 @@
+{
+  "headers": [
+    {
+      "source": "/checklist.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"checklist.pdf\""
+        }
+      ]
+    }
+  ]
+}

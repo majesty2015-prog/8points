@@ -433,9 +433,28 @@
     input::placeholder, textarea::placeholder { color: #B0ACBA; }
     textarea { resize: vertical; min-height: 118px; }
     input[type="checkbox"] {
+      -webkit-appearance: none; appearance: none;
       width: 18px !important; height: 18px !important; padding: 0 !important;
-      flex-shrink: 0; cursor: pointer; accent-color: var(--accent);
-      -webkit-appearance: checkbox; appearance: checkbox;
+      flex-shrink: 0; cursor: pointer;
+      border: 2px solid #9CA3AF !important;
+      border-radius: 4px !important;
+      background: #fff !important;
+      position: relative;
+      transition: background 0.15s, border-color 0.15s;
+      box-shadow: none !important;
+    }
+    input[type="checkbox"]:checked {
+      background: var(--accent) !important;
+      border-color: var(--accent) !important;
+    }
+    input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px; top: 1px;
+      width: 5px; height: 9px;
+      border: 2px solid #fff;
+      border-top: none; border-left: none;
+      transform: rotate(45deg);
     }
 
     .consent-row {
@@ -1126,12 +1145,16 @@
     btn.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px;"></span>Отправляем...';
 
     try {
+      const ctrl = new AbortController();
+      const tid = setTimeout(() => ctrl.abort(), 8000);
       await fetch('/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, company: 'Скачал чек-лист', phone, message: 'Запрос бесплатного чек-листа с главной страницы' })
+        body: JSON.stringify({ name, email, company: 'Скачал чек-лист', phone, message: 'Запрос бесплатного чек-листа с главной страницы' }),
+        signal: ctrl.signal
       });
-    } catch (e) { /* даём PDF даже при ошибке отправки */ }
+      clearTimeout(tid);
+    } catch (e) { /* даём PDF даже при ошибке/таймауте отправки */ }
 
     try { localStorage.setItem(clKey, JSON.stringify({ email: email.toLowerCase(), date: today })); } catch(e) {}
 
@@ -1187,7 +1210,7 @@
       <div class="success-icon">✓</div>
       <h3>Готово!</h3>
       <p style="margin-bottom:24px">Нажмите кнопку ниже, чтобы скачать PDF</p>
-      <a href="/checklist.pdf" download="Чек-лист 8ПОИНТС.pdf" class="btn btn-primary btn-submit" style="text-decoration:none;display:flex">
+      <a href="/checklist.pdf" download="checklist.pdf" class="btn btn-primary btn-submit" style="text-decoration:none;display:flex">
         Скачать чек-лист
       </a>
     </div>
