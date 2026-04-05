@@ -1136,13 +1136,16 @@
 
     const today = new Date().toDateString();
     const clKey = '8p_checklist';
-    try {
-      const saved = JSON.parse(localStorage.getItem(clKey) || '{}');
-      if (saved.email === email.toLowerCase() && saved.date === today) {
-        showChecklistError('Вы уже скачивали чек-лист сегодня. Проверьте папку загрузок.');
-        return;
-      }
-    } catch (e) {}
+    const testEmails = ['akinina.n@inbox.ru'];
+    if (!testEmails.includes(email.toLowerCase())) {
+      try {
+        const saved = JSON.parse(localStorage.getItem(clKey) || '{}');
+        if (saved.email === email.toLowerCase() && saved.date === today) {
+          showChecklistError('Вы уже скачивали чек-лист сегодня. Проверьте папку загрузок.');
+          return;
+        }
+      } catch (e) {}
+    }
 
     const btn = document.getElementById('btn-checklist-submit');
     btn.disabled = true;
