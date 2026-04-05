@@ -981,7 +981,7 @@
 
 <!-- ═══ COOKIE BANNER ═══ -->
 <div id="cookieBanner">
-  <span>Сайт использует cookie. Продолжая пользоваться сайтом, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a>.</span>
+  <span>Сайт использует cookie для аналитики. Продолжая пользоваться сайтом, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a>. Отказаться можно в настройках браузера.</span>
   <button id="cookieAccept">Принять</button>
 </div>
 
@@ -1148,22 +1148,36 @@
     btn.disabled = true;
     btn.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px;"></span>Отправляем...';
 
+    let userMailSent = false;
     try {
       const ctrl = new AbortController();
-      const tid = setTimeout(() => ctrl.abort(), 8000);
-      await fetch('/api/submit', {
+      const tid = setTimeout(() => ctrl.abort(), 10000);
+      const resp = await fetch('/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, company: 'Скачал чек-лист', phone, message: 'Запрос бесплатного чек-листа с главной страницы' }),
         signal: ctrl.signal
       });
       clearTimeout(tid);
-    } catch (e) { /* даём PDF даже при ошибке/таймауте отправки */ }
+      if (resp.ok) {
+        const data = await resp.json().catch(() => ({}));
+        userMailSent = data.userMailSent === true;
+      }
+    } catch (e) { /* продолжаем несмотря на ошибку/таймаут */ }
 
     try { localStorage.setItem(clKey, JSON.stringify({ email: email.toLowerCase(), date: today })); } catch(e) {}
 
     document.getElementById('modalFormContent').style.display = 'none';
-    document.getElementById('modalSuccess').style.display = 'block';
+    const successEl = document.getElementById('modalSuccess');
+    successEl.style.display = 'block';
+    const successMsg = document.getElementById('modalSuccessMsg');
+    if (successMsg) {
+      if (userMailSent) {
+        successMsg.innerHTML = 'Чек-лист отправлен на <strong>' + email + '</strong>.<br><span style="font-size:0.85rem;color:#6B6875">Проверьте папку «Входящие» или «Спам».</span>';
+      } else {
+        successMsg.innerHTML = 'Ваша заявка принята. Мы пришлём чек-лист на <strong>' + email + '</strong> в ближайшее время.';
+      }
+    }
     document.body.style.overflow = '';
   }
 
@@ -1213,8 +1227,7 @@
     <div class="form-success" id="modalSuccess" style="display:none">
       <div class="success-icon">✓</div>
       <h3>Готово!</h3>
-      <p style="margin-bottom:8px">Чек-лист отправлен на ваш email.</p>
-      <p style="font-size:0.85rem;color:#6B6875;margin-bottom:24px">Проверьте папку «Входящие» или «Спам».</p>
+      <p id="modalSuccessMsg" style="margin-bottom:24px;line-height:1.6">Чек-лист отправлен на ваш email.<br><span style="font-size:0.85rem;color:#6B6875">Проверьте папку «Входящие» или «Спам».</span></p>
       <button class="btn btn-primary btn-submit" onclick="closeChecklistModal()">
         Закрыть
       </button>
