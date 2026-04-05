@@ -539,7 +539,7 @@
 
     /* ── CHECKLIST MODAL ── */
     .modal-overlay {
-      display: none; position: fixed; inset: 0; z-index: 200;
+      display: none; position: fixed; inset: 0; z-index: 10000;
       background: rgba(0,0,0,0.65);
       align-items: center; justify-content: center; padding: 24px;
     }
@@ -1096,10 +1096,14 @@
   function openChecklistModal() {
     document.getElementById('checklistModal').classList.add('open');
     document.body.style.overflow = 'hidden';
+    const cb = document.getElementById('cookieBanner');
+    if (cb) cb.style.display = 'none';
   }
   function closeChecklistModal() {
     document.getElementById('checklistModal').classList.remove('open');
     document.body.style.overflow = '';
+    const cb = document.getElementById('cookieBanner');
+    if (cb && !localStorage.getItem('cookieAccepted')) cb.style.display = 'flex';
   }
   function closeChecklistModalOverlay(e) {
     if (e.target === document.getElementById('checklistModal')) closeChecklistModal();
